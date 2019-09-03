@@ -32,7 +32,7 @@ import skimage.draw
 from pycocotools.coco import COCO
 
 # Root directory of the project
-ROOT_DIR = os.path.abspath("../../")
+ROOT_DIR = os.path.abspath("/home/jupyter/tutorials/indproject/mrcnn")
 
 # Import Mask RCNN
 sys.path.append(ROOT_DIR)  # To find local version of the library
@@ -122,18 +122,16 @@ class BeeDataset(utils.Dataset):
         assert subset in ["train", "val"]
         
         if subset == 'train':
-          selected_imgs = TRAIN_SET
+            selected_imgs = TRAIN_SET
         elif subset == 'val':
-          selected_imgs = VAL_SET
+            selected_imgs = VAL_SET
   
         allImgs = coco.getImgIds()
         img_list = coco.loadImgs(allImgs)
        
         for img in img_list: 
           
-          #print("C")
           if img["file_name"] in selected_imgs:
-            #print("D")
             
             img_path = os.path.join(dataset_dir, img["file_name"])
             self.add_image(
@@ -165,9 +163,9 @@ class BeeDataset(utils.Dataset):
                         dtype=np.uint8)
         
         for i, ann in enumerate(annotations):
-          ann['image_id'] = int(ann['image_id'])
-          mask[:,:,i] = coco.annToMask(ann)
-          classes.append(ann['category_id'])
+            ann['image_id'] = int(ann['image_id'])
+            mask[:,:,i] = coco.annToMask(ann)
+            classes.append(ann['category_id'])
 
         return mask.astype(np.bool), np.array(classes).astype(np.int32)
 
