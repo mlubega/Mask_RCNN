@@ -60,7 +60,7 @@ VAL_SET = ['6.png', '11.png', '19.png']
 ############################################################
 
 
-class BeesConfig(Config):
+class BeeConfig(Config):
     """Configuration for training on the bees dataset.
     Derives from the base Config class and overrides values specific
     to the  bees dataset.
